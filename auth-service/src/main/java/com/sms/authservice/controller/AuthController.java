@@ -22,6 +22,7 @@ import org.springframework.web.client.RestTemplate;
 import com.sms.authservice.payload.JwtAuthenticationResponse;
 import com.sms.authservice.payload.LoginRequest;
 import com.sms.authservice.security.JwtTokenProvider;
+import com.sms.authservice.repository.UserRepository;
 
 
 
@@ -31,6 +32,10 @@ public class AuthController {
 
 	@Autowired
     AuthenticationManager authenticationManager;
+	
+    @Autowired
+    UserRepository userRepository;
+
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -52,6 +57,12 @@ public class AuthController {
 
         String jwt = tokenProvider.generateToken(authentication);
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+    }
+    
+    @GetMapping("/getCount")
+    public Long countUsers() {
+        Long count = userRepository.count();
+        return count;
     }
 	 
 

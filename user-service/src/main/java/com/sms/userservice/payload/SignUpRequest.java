@@ -22,8 +22,9 @@ public class SignUpRequest {
 	    @NotBlank
 	    @Size(min = 6, max = 20)
 	    private String password;
+	    
 
-	    public String getName() {
+		public String getName() {
 	        return name;
 	    }
 
