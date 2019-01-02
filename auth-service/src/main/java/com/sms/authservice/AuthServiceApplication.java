@@ -10,12 +10,14 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
+
 @SpringBootApplication
 @EnableEurekaClient
 @EntityScan(basePackageClasses = { 
 		AuthServiceApplication.class,
 		Jsr310JpaConverters.class 
 })
+
 public class AuthServiceApplication {
 	
 	@PostConstruct

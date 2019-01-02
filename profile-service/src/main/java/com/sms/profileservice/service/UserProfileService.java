@@ -21,6 +21,9 @@ public class UserProfileService {
     private UserProfileRepository userProfileRepository;
 	
 	 private static final Logger logger = LoggerFactory.getLogger(UserProfileService.class);
+	 
+	 
+	 
 	
 	 public UserProfile getProfileById(Long userId) {
 	        UserProfile profile = userProfileRepository.findById(userId).orElseThrow(
