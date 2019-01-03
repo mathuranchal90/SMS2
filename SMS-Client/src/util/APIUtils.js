@@ -93,7 +93,7 @@ export function getCurrentUser() {
 
 export function getUserProfile(username) {
     return request({
-        url: USER_API_BASE_URL + "/users/" + username,
+        url: USER_API_BASE_URL + "/user/" + username,
         method: 'GET'
     });
 }

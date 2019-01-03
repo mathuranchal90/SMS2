@@ -35,6 +35,7 @@ import com.sms.userservice.model.RoleName;
 import com.sms.userservice.model.User;
 import com.sms.userservice.payload.ApiResponse;
 import com.sms.userservice.payload.SignUpRequest;
+import com.sms.userservice.payload.UserIdentityAvailability;
 import com.sms.userservice.repository.RoleRepository;
 import com.sms.userservice.repository.UserRepository;
 import com.sms.userservice.security.JwtTokenProvider;
@@ -102,7 +103,7 @@ public class UserController {
 	        return userSummary;
 	    }
 
-	    @GetMapping("/users/{username}")
+	    @GetMapping("/{username}")
 	    public UserProfile getUserProfile(@PathVariable(value = "username") String username) {
 	        User user = userRepository.findByUsername(username)
 	                .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
@@ -111,6 +112,19 @@ public class UserController {
 
 	        return userProfile;
 	    }
+	    @GetMapping("/checkUsernameAvailability")
+	    public UserIdentityAvailability checkUsernameAvailability(@RequestParam(value = "username") String username) {
+	        Boolean isAvailable = !userRepository.existsByUsername(username);
+	        return new UserIdentityAvailability(isAvailable);
+	    }
+	    
+	    @GetMapping("/checkEmailAvailability")
+	    public UserIdentityAvailability checkEmailAvailability(@RequestParam(value = "email") String email) {
+	        Boolean isAvailable = !userRepository.existsByEmail(email);
+	        return new UserIdentityAvailability(isAvailable);
+	    }
+	    
+	    
 	    
 	    
 	    
