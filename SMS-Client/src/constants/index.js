@@ -1,4 +1,4 @@
-export const AUTH_API_BASE_URL = 'http://localhost:8085/auth-service/api';
+export const AUTH_API_BASE_URL = 'http://localhost:8182/api';
 //export const USER_API_BASE_URL = 'http://localhost:8181/api';
 export const USER_API_BASE_URL = 'http://localhost:8085/user-service/api';
 export const API_BASE_URL = '/api';

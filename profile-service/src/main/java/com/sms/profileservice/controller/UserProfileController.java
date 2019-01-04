@@ -55,7 +55,7 @@ public class UserProfileController {
 	    
 	    
 	    @PostMapping("/saveImage")
-	    public  void saveImage(@RequestParam("file") MultipartFile File) throws Exception {
+	    public String  saveImage(@RequestParam("file") MultipartFile File) throws Exception {
 		
 		 String fileName= StringUtils.cleanPath(File.getOriginalFilename());
 		 
@@ -83,6 +83,8 @@ public class UserProfileController {
 				
 				System.out.println("Image Saved");
 				
+				return response.getStatusCode()+"\n"+response.getBody();
+				
 			}catch(IOException ex) {
 				throw new Exception("Could not store file"+ fileName +".Please try again!");
 			}
@@ -91,8 +93,8 @@ public class UserProfileController {
 	    
 	    public static FileSystemResource getUserFileResource(MultipartFile File) throws IOException {
 	        //todo replace tempFile with a real file
-	        Path tempFile = Files.createTempFile("upload-test-file", ".txt");
-	        Files.write(tempFile, "some test content...\nline1\nline2".getBytes());
+	        Path tempFile = Files.createTempFile(File.getName(),".jpeg");
+	        Files.write(tempFile, File.getBytes());
 	        System.out.println("uploading: " + tempFile);
 	        File file = tempFile.toFile();
 	        //to upload in-memory bytes use ByteArrayResource instead
