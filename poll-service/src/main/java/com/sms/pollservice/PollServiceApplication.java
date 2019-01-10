@@ -11,6 +11,7 @@ import java.util.TimeZone;
 
 
 @SpringBootApplication
+@EnableEurekaClient
 @EntityScan(basePackageClasses = {
 		PollServiceApplication.class,
 		Jsr310JpaConverters.class
