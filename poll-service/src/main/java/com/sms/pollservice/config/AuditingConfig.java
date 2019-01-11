@@ -15,7 +15,7 @@ import java.util.Optional;
 @EnableJpaAuditing
 public class AuditingConfig {
 
-    @Bean
+   @Bean
     public AuditorAware<Long> auditorProvider() {
         return new SpringSecurityAuditAwareImpl();
     }

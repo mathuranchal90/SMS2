@@ -2,6 +2,8 @@ package com.sms.pollservice.security;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sms.pollservice.model.User;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,7 +37,21 @@ public class UserPrincipal implements UserDetails {
         this.authorities = authorities;
     }
 
-    
+    public static UserPrincipal create(User user) {
+        List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
+                new SimpleGrantedAuthority(role.getName().name())
+        ).collect(Collectors.toList());
+
+        return new UserPrincipal(
+                user.getId(),
+                user.getName(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getPassword(),
+                authorities
+        );
+    }
+
     public Long getId() {
         return id;
     }
@@ -97,4 +113,3 @@ public class UserPrincipal implements UserDetails {
         return Objects.hash(id);
     }
 }
-
